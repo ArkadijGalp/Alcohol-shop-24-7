@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "767081988129",
+    "project_id": "alcoholshopb",
+    "storage_bucket": "alcoholshopb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:767081988129:android:de193530ce64d7b35da360",
+        "android_client_info": {
+          "package_name": "space.arkady.alcoholshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "767081988129-k18u7eqgkd1ua2rrnlss41gjj682lvqb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "space.arkady.alcoholshop",
+            "certificate_hash": "095d7dea0531a7671e1c45857cd7775a287b516f"
+          }
+        },
+        {
+          "client_id": "767081988129-cuftmelnqnm920j3goirboqtriikhad1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpZVq6_1ghfv_KEJGXnhBnPGo0Cc5znI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "767081988129-cuftmelnqnm920j3goirboqtriikhad1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
