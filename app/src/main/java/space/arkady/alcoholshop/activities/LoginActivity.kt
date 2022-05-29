@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import space.arkady.alcoholshop.R
 import space.arkady.alcoholshop.firestore.FirestoreClass
 import space.arkady.alcoholshop.models.User
+import space.arkady.alcoholshop.utils.Constants
 
 class LoginActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,6 +88,7 @@ class LoginActivity : BaseActivity(), View.OnClickListener {
         if (user.profileCompiled == 0) {
             //If the user profile is incomplete - Use the UserProfileActivity
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
+            intent.putExtra(Constants.EXTRA_USER_DETAILS, user)
             startActivity(intent)
         } else {
             //Redirect to Main user screen(MainActivity) after login

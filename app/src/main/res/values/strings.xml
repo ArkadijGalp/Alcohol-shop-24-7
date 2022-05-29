@@ -41,4 +41,6 @@
     <string name="rb_lbl_female">Female</string>
     <string name="btn_lbl_save">Save</string>
     <string name="phone_number">Phone number</string>
+    <string name="read_storage_permission_denied">You denied permission from the storage. Try allowing it from the settings</string>
+    <string name="image_selection_failed">Image selection failed</string>
 </resources>
