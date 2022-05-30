@@ -1,7 +1,6 @@
 package space.arkady.alcoholshop.activities
 
 import android.app.Dialog
-import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat

@@ -22,6 +22,5 @@ class MainActivity : AppCompatActivity() {
             getSharedPreferences(Constants.MYALCOHOLSHOP_PREFS, Context.MODE_PRIVATE)
         val username = sharedPreferences.getString(Constants.LOGGED_IN_USERNAME, "")!!
         tv_main.text = "The logged user is $username."
-
     }
 }

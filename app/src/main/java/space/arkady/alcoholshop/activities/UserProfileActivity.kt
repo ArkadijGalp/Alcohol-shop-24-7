@@ -4,13 +4,16 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import space.arkady.alcoholshop.R
+import space.arkady.alcoholshop.firestore.FirestoreClass
 import space.arkady.alcoholshop.models.User
 import space.arkady.alcoholshop.utils.Constants
 import space.arkady.alcoholshop.utils.GlideLoader
@@ -19,23 +22,30 @@ import java.io.IOException
 class UserProfileActivity : BaseActivity(),
     View.OnClickListener {
 
+    private lateinit var mUserDetails: User
+    private var mSelectedImageFileUri: Uri? = null
+    private var mUserProfileImageURL: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_profile)
 
-        var userDetails: User = User()
+
         if (intent.hasExtra(Constants.EXTRA_USER_DETAILS)) {
             //Get the user details from intent as parcelable extra
-            userDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
+            mUserDetails = intent.getParcelableExtra(Constants.EXTRA_USER_DETAILS)!!
         }
         et_first_name.isEnabled = false
-        et_first_name.setText(userDetails.firstName)
+        et_first_name.setText(mUserDetails.firstName)
 
         et_lastname.isEnabled = false
-        et_lastname.setText(userDetails.lastName)
+        et_lastname.setText(mUserDetails.lastName)
 
         email_main.isEnabled = false
-        email_main.setText(userDetails.email)
+        email_main.setText(mUserDetails.email)
+
+        iv_user_photo.setOnClickListener(this@UserProfileActivity)
+        btn_register.setOnClickListener(this@UserProfileActivity)
 
     }
 
@@ -63,8 +73,60 @@ class UserProfileActivity : BaseActivity(),
 
                     }
                 }
+
+                R.id.btn_register -> {
+
+                    if (validateUserProfileDetails()) {
+                        showProgressDialog(resources.getString(R.string.please_wait))
+
+                        if (mSelectedImageFileUri != null)
+                            FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+                        else {
+                            updateUserProfileDetails()
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private fun updateUserProfileDetails() {
+        val userHashMap = HashMap<String, Any>()
+        val mobileNumber = et_mobile_number.text.toString().trim() { it <= ' ' }
+        val gender = if (rb_male.isChecked) {
+            Constants.MALE
+        } else {
+            Constants.FEMALE
+        }
+        if (mUserProfileImageURL.isNotEmpty()) {
+            userHashMap[Constants.IMAGE] = mUserProfileImageURL
+        }
+        if (mobileNumber.isNotEmpty()) {
+            userHashMap[Constants.MOBILE] = mobileNumber.toLong()
+        }
+        //key:gender value:Male
+        //gender Male
+        userHashMap[Constants.GENDER] = gender
+
+        userHashMap[Constants.COMPLETED_PROFILE] = 1
+
+       // showProgressDialog(resources.getString(R.string.please_wait))
+
+        FirestoreClass().updateUserProfileData(this, userHashMap)
+        //showErrorSnackBar("Your details are valid. You can upgrade them.", false)
+    }
+
+    fun userProfileUpdateSuccess() {
+        hideProgressDialog()
+
+        Toast.makeText(
+            this@UserProfileActivity,
+            resources.getString(R.string.msg_profile_update_successful),
+            Toast.LENGTH_SHORT
+        ).show()
+
+        startActivity(Intent(this@UserProfileActivity, MainActivity::class.java))
+        finish()
     }
 
     override fun onRequestPermissionsResult(
@@ -96,8 +158,8 @@ class UserProfileActivity : BaseActivity(),
             if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE) {
                 if (data != null) {
                     try {
-                        val selectedImageFileUri = data.data!!
-                        GlideLoader(this).loadUserPicture(selectedImageFileUri, iv_user_photo)
+                        mSelectedImageFileUri = data.data!!
+                        GlideLoader(this).loadUserPicture(mSelectedImageFileUri!!, iv_user_photo)
                     } catch (e: IOException) {
                         e.printStackTrace()
                         Toast.makeText(
@@ -110,6 +172,28 @@ class UserProfileActivity : BaseActivity(),
             } else if (resultCode == Activity.RESULT_CANCELED)
                 Toast.makeText(this@UserProfileActivity, "is cancelled", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun validateUserProfileDetails(): Boolean {
+        return when {
+            TextUtils.isEmpty(et_mobile_number.text.toString().trim() { it <= ' ' }) -> {
+                showErrorSnackBar(
+                    resources.getString(R.string.error_msg_enter_mobile_number),
+                    true
+                )
+                false
+            }
+            else -> {
+                true
+            }
+        }
+    }
+
+    fun imageUploadSuccess(imageURL: String) {
+       // hideProgressDialog()
+
+        mUserProfileImageURL = imageURL
+        updateUserProfileDetails()
     }
 }
 

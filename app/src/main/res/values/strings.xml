@@ -43,4 +43,14 @@
     <string name="phone_number">Phone number</string>
     <string name="read_storage_permission_denied">You denied permission from the storage. Try allowing it from the settings</string>
     <string name="image_selection_failed">Image selection failed</string>
+    <string name="error_msg_enter_mobile_number">Provide your mobile number</string>
+    <string name="msg_profile_update_successful">Your profile has been successfully updated</string>
+    <string name="title_activity_dash_board">DashBoardActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_shopping_cart">Shopping cart</string>
+    <string name="paying_for_the_order">Payment</string>
+    <string name="title_store">Store</string>
+    <string name="title_payment">Payment</string>
 </resources>
