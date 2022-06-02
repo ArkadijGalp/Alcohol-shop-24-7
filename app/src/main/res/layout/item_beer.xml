@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="16dp">
+
+
+
+        <ImageView
+            android:id="@+id/image_beer"
+            android:layout_width="75dp"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_beer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Beer: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Style: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_beer" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_brand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Brand: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_style" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_fermentation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Fermentation: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_brand" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_region"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Region: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_fermentation" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_producer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Producer: "
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_region" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_strength"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:padding="4dp"
+            android:text="Strength:"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/image_beer"
+            app:layout_constraintTop_toBottomOf="@+id/tv_producer" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_volume"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center|left"
+        android:padding="4dp"
+        android:text="Volume:"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:padding="4dp"
+        android:text="Price: "
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/remove_beer_button"
+        app:layout_constraintTop_toBottomOf="@+id/tv_volume" />
+
+    <Button
+        android:id="@+id/add_beer_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:text="add"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_strength"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintVertical_bias="0.483"
+        tools:ignore="Missing constraints" />
+
+    <Button
+        android:id="@+id/remove_beer_button"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="24dp"
+        android:text="-1"
+        android:textSize="10sp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/add_beer_button"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintVertical_bias="0.483" />
+
+    <TextView
+        android:id="@+id/amount_of_beers_selected"
+        android:layout_width="25dp"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="0"
+        android:inputType="number"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/remove_beer_button"
+        app:layout_constraintHorizontal_bias="0.941"
+        app:layout_constraintStart_toEndOf="@+id/add_beer_button"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price"
+        app:layout_constraintVertical_bias="0.416" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

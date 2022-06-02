@@ -11,14 +11,27 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.tasks.await
 import space.arkady.alcoholshop.activities.LoginActivity
 import space.arkady.alcoholshop.activities.RegisterActivity
 import space.arkady.alcoholshop.activities.UserProfileActivity
+import space.arkady.alcoholshop.models.Drink
 import space.arkady.alcoholshop.models.User
 import space.arkady.alcoholshop.utils.Constants
+import space.arkady.alcoholshop.utils.Constants.DRINKS_COLLECTION
+import java.lang.Exception
 
 class FirestoreClass {
     private val mFirestore = FirebaseFirestore.getInstance()
+    private val drinksCollection = mFirestore.collection(DRINKS_COLLECTION)
+
+    suspend fun getAllDrinks(): List<Drink> {
+        return try {
+            drinksCollection.get().await().toObjects(Drink::class.java)
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
 
     fun registerUser(activity: RegisterActivity, userInfo: User) {
         mFirestore.collection(Constants.USERS)
