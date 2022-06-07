@@ -13,9 +13,10 @@ import kotlinx.coroutines.launch
 import space.arkady.alcoholshop.activities.ui.store.DrinkInteractor
 import space.arkady.alcoholshop.activities.ui.store.StoreAdapter
 import space.arkady.alcoholshop.domain.models.Beer
+import space.arkady.alcoholshop.domain.usecases.BeerUsecase
 import space.arkady.alcoholshop.utils.Constants
 
-class MainViewModel(val interactor: DrinkInteractor) : ViewModel() {
+class MainViewModel(private val beerUsecase: BeerUsecase) : ViewModel() {
 
     val beerDB = Firebase.firestore
     private val drinksCollection = beerDB.collection(Constants.DRINKS_COLLECTION)
@@ -27,19 +28,21 @@ class MainViewModel(val interactor: DrinkInteractor) : ViewModel() {
         MutableStateFlow(MainViewState.Loading)
     val mainViewStateFlow: StateFlow<MainViewState> = _mainViewStateFlow.asStateFlow()
 
+    fun fetchBeers() = viewModelScope.launch(Dispatchers.IO) {
+        _mainViewStateFlow.value = MainViewState.Loading
+        kotlin.runCatching {
+            beerUsecase.getBeers()
+        }.fold(
+            onSuccess = { beers ->
+                _mainViewStateFlow.value = MainViewState.Success(beers)
+            },
+            onFailure = { error ->
+                _mainViewStateFlow.value =
+                    MainViewState.Failure(error.localizedMessage ?: "Something went wrong")
+            }
+        )
 
-/*
-    suspend fun getAllDrinks(): List<Beer> {
-        return try {
-            drinksCollection.get().await().toObjects(Beer::class.java)
-        } catch (e: Exception) {
-            emptyList()
-        }
     }
-    suspend fun fetchBeer() = withContext(Dispatchers.IO) {
-        val allbeers = interactor.getDrink()
-    }
-*/
 
 
 /*        FirebaseFirestore.getInstance()

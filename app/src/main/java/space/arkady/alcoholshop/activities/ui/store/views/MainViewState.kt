@@ -4,7 +4,7 @@ import space.arkady.alcoholshop.domain.models.Beer
 
 sealed class MainViewState {
 
-    object Loading : MainViewState() {
+    object Loading : MainViewState()
 
         data class Success(
             val data: List<Beer>
@@ -13,5 +13,5 @@ sealed class MainViewState {
         data class Failure(
             val errorMessage: String
         ) : MainViewState()
-    }
+
 }

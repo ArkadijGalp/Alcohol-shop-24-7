@@ -20,22 +20,12 @@ class StoreAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         return StoreViewHolder(
             ItemBeerBinding.inflate(layoutInflater, parent, false)
-        )
+        , context)
     }
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
         val drink = drinks[position]
-        holder.beer.text = drink.beer
-        holder.style.text = drink.style
-        holder.brand.text = drink.brand
-        holder.fermentation.text = drink.fermentation
-        holder.region.text = drink.region
-        holder.producer.text = drink.producer
-        holder.strength.text = drink.strength
-        holder.volume.text = drink.volume
-        holder.price.text = drink.price
-
-        Glide.with(context).load(drink.imageUri).into(holder.imageBeer)
+        holder.bindItem(drink)
     }
 
     override fun getItemCount(): Int {

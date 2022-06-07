@@ -1,5 +1,6 @@
 package space.arkady.alcoholshop.activities.ui.store
 
+import android.content.Context
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -13,10 +14,10 @@ import space.arkady.alcoholshop.R
 import space.arkady.alcoholshop.databinding.ItemBeerBinding
 import space.arkady.alcoholshop.domain.models.Beer
 
-class StoreViewHolder(private val binding: ItemBeerBinding) :
+class StoreViewHolder(private val binding: ItemBeerBinding, private val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
 
-/*    fun bindItem(item: Beer) {
+   fun bindItem(item: Beer) {
         with(binding) {
             tvBeer.text = item.beer
             tvStyle.text = item.style
@@ -27,9 +28,11 @@ class StoreViewHolder(private val binding: ItemBeerBinding) :
             tvRegion.text = item.region
             tvFermentation.text = item.fermentation
             tvBrand.text = item.brand
+            Glide.with(context).load(item.imageUri).into(imageBeer)
         }
-    }*/
+    }
 
+/*
     val beer: TextView = itemView.findViewById(R.id.tv_beer)
     val style: TextView = itemView.findViewById(R.id.tv_style)
     val brand: TextView = itemView.findViewById(R.id.tv_brand)
@@ -40,6 +43,7 @@ class StoreViewHolder(private val binding: ItemBeerBinding) :
     val volume: TextView = itemView.findViewById(R.id.tv_volume)
     val price: TextView = itemView.findViewById(R.id.tv_price)
     val imageBeer: ImageView = itemView.findViewById(R.id.image_beer)
+*/
 
 
 }
