@@ -14,3 +14,5 @@ data class User(
     val gender: String = "",
     val profileCompleted: Int = 0
 ):Parcelable
+
+//Передать аргументы фрагмента

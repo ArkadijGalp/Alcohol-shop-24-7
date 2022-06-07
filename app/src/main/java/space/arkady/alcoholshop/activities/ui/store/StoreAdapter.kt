@@ -2,43 +2,24 @@ package space.arkady.alcoholshop.activities.ui.store
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestManager
-import kotlinx.android.synthetic.main.item_beer.view.*
-import space.arkady.alcoholshop.R
-import space.arkady.alcoholshop.models.Drink
-import javax.inject.Inject
+import space.arkady.alcoholshop.databinding.ItemBeerBinding
+import space.arkady.alcoholshop.domain.models.Beer
 
 class StoreAdapter(
     private val context: Context,
-    private val drinks: List<Drink>
-) : RecyclerView.Adapter<StoreAdapter.StoreViewHolder>() {
+    private val drinks: List<Beer>
 
-    inner class StoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val beer: TextView = itemView.findViewById(R.id.tv_beer)
-        val style: TextView = itemView.findViewById(R.id.tv_style)
-        val brand: TextView = itemView.findViewById(R.id.tv_brand)
-        val fermentation: TextView = itemView.findViewById(R.id.tv_fermentation)
-        val region: TextView = itemView.findViewById(R.id.tv_region)
-        val producer: TextView = itemView.findViewById(R.id.tv_producer)
-        val strength: TextView = itemView.findViewById(R.id.tv_strength)
-        val volume: TextView = itemView.findViewById(R.id.tv_volume)
-        val price: TextView = itemView.findViewById(R.id.tv_price)
-        val imageBeer: ImageView = itemView.findViewById(R.id.image_beer)
-    }
+) : RecyclerView.Adapter<StoreViewHolder>() {
+    private var beers: List<Beer> = emptyList()
 
+    //Вынести вьюхолдер в отдельный файл
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
         return StoreViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.item_beer,
-                parent,
-                false
-            )
+            ItemBeerBinding.inflate(layoutInflater, parent, false)
         )
     }
 
@@ -60,5 +41,4 @@ class StoreAdapter(
     override fun getItemCount(): Int {
         return drinks.size
     }
-
 }

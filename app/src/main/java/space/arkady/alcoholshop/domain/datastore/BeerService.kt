@@ -1,0 +1,4 @@
+package space.arkady.alcoholshop.domain.datastore
+
+private const val AUTH_TOKEN =
+    "AAAAspmmQCE:APA91bGUKCKIKEI0Y-LESQ8eCcp1ngHtuGfa0XkdnULCjHA863lwr7JqHsrahlNFi3bpoAgqHIgztTQ6xflNBe7GJ4gMQ350gjefBRIW5ZdkWfjt-JAD5PPdwbEEdgHp1sDsho_CPMrh"

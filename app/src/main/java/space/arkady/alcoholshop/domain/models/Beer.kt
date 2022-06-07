@@ -1,9 +1,6 @@
-package space.arkady.alcoholshop.models
+package space.arkady.alcoholshop.domain.models
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
-
-data class Drink(
+data class Beer(
     val beer: String = "",
     val brand: String = "",
     val fermentation: String = "",

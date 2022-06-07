@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.net.Uri
 import android.util.Log
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
@@ -15,7 +14,7 @@ import kotlinx.coroutines.tasks.await
 import space.arkady.alcoholshop.activities.LoginActivity
 import space.arkady.alcoholshop.activities.RegisterActivity
 import space.arkady.alcoholshop.activities.UserProfileActivity
-import space.arkady.alcoholshop.models.Drink
+import space.arkady.alcoholshop.domain.models.Beer
 import space.arkady.alcoholshop.models.User
 import space.arkady.alcoholshop.utils.Constants
 import space.arkady.alcoholshop.utils.Constants.DRINKS_COLLECTION
@@ -25,9 +24,9 @@ class FirestoreClass {
     private val mFirestore = FirebaseFirestore.getInstance()
     private val drinksCollection = mFirestore.collection(DRINKS_COLLECTION)
 
-    suspend fun getAllDrinks(): List<Drink> {
+    suspend fun getAllDrinks(): List<Beer> {
         return try {
-            drinksCollection.get().await().toObjects(Drink::class.java)
+            drinksCollection.get().await().toObjects(Beer::class.java)
         } catch (e: Exception) {
             emptyList()
         }
