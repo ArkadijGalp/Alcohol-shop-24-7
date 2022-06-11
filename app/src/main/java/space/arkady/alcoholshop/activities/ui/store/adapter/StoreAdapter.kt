@@ -1,16 +1,14 @@
-package space.arkady.alcoholshop.activities.ui.store
+package space.arkady.alcoholshop.activities.ui.store.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import kotlinx.coroutines.withContext
 import space.arkady.alcoholshop.databinding.ItemBeerBinding
-import space.arkady.alcoholshop.domain.models.Beer
+import space.arkady.alcoholshop.activities.ui.store.models.Beer
 
 class StoreAdapter(
-    private val context: Context,
-    private val drinks: List<Beer>
 
 ) : RecyclerView.Adapter<StoreViewHolder>() {
     private var beers: List<Beer> = emptyList()
@@ -20,15 +18,15 @@ class StoreAdapter(
         val layoutInflater = LayoutInflater.from(parent.context)
         return StoreViewHolder(
             ItemBeerBinding.inflate(layoutInflater, parent, false)
-        , context)
+        )
     }
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
-        val drink = drinks[position]
+        val drink = beers[position]
         holder.bindItem(drink)
     }
 
     override fun getItemCount(): Int {
-        return drinks.size
+        return beers.size
     }
 }

@@ -2,20 +2,23 @@ package space.arkady.alcoholshop.activities
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.item_beer.*
-import space.arkady.alcoholshop.activities.ui.store.StoreAdapter
+import dagger.hilt.android.AndroidEntryPoint
+import space.arkady.alcoholshop.R
+import space.arkady.alcoholshop.activities.ui.store.ShoppingCartFragment
+import space.arkady.alcoholshop.activities.ui.store.adapter.StoreAdapter
 import space.arkady.alcoholshop.activities.ui.store.views.MainViewModel
 import space.arkady.alcoholshop.databinding.ActivityDashBoardBinding
-import space.arkady.alcoholshop.domain.models.Beer
+import space.arkady.alcoholshop.activities.ui.store.models.Beer
+import space.arkady.alcoholshop.utils.openFragment
 
+@AndroidEntryPoint
 class DashBoardActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this)[MainViewModel::class.java]
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     private lateinit var binding: ActivityDashBoardBinding
 
@@ -24,21 +27,19 @@ class DashBoardActivity : AppCompatActivity() {
         binding = ActivityDashBoardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        binding.recycler.apply {
-            layoutManager = LinearLayoutManager(this@DashBoardActivity)
-        }
-
-        fetchData()
-    }
-
-
-/*        openFragment(
+        openFragment(
             R.id.container,
             ShoppingCartFragment.newInstance(),
             ShoppingCartFragment.TAG
         )
-    }*/
+
+/*        binding.recycler.apply {
+            layoutManager = LinearLayoutManager(this@DashBoardActivity)*/
+        }
+    }
+
+
+
 
 /*    private fun setupViews() {
         with(binding) {
@@ -46,7 +47,7 @@ class DashBoardActivity : AppCompatActivity() {
         }
     }*/
 
-    fun fetchData() {
+/*    fun fetchData() {
         FirebaseFirestore.getInstance()
             .collection("drinks")
             .get()
@@ -58,6 +59,4 @@ class DashBoardActivity : AppCompatActivity() {
             }.addOnFailureListener {
                 Toast.makeText(this, "An error has occurred", Toast.LENGTH_SHORT).show()
             }
-    }
-}
-
+    }*/

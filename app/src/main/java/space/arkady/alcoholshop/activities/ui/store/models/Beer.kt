@@ -1,4 +1,4 @@
-package space.arkady.alcoholshop.domain.models
+package space.arkady.alcoholshop.activities.ui.store.models
 
 data class Beer(
     val beer: String = "",

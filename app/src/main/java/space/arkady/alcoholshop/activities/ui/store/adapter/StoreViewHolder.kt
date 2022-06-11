@@ -1,21 +1,16 @@
-package space.arkady.alcoholshop.activities.ui.store
+package space.arkady.alcoholshop.activities.ui.store.adapter
 
 import android.content.Context
-import android.net.Uri
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.ktx.firestoreSettings
 import kotlinx.android.synthetic.main.item_beer.view.*
-import kotlinx.coroutines.withContext
-import space.arkady.alcoholshop.R
+import space.arkady.alcoholshop.activities.ui.store.ShoppingCartFragment
 import space.arkady.alcoholshop.databinding.ItemBeerBinding
-import space.arkady.alcoholshop.domain.models.Beer
+import space.arkady.alcoholshop.activities.ui.store.models.Beer
 
-class StoreViewHolder(private val binding: ItemBeerBinding, private val context: Context) :
+class StoreViewHolder(private val binding: ItemBeerBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
 
    fun bindItem(item: Beer) {
         with(binding) {
@@ -28,7 +23,7 @@ class StoreViewHolder(private val binding: ItemBeerBinding, private val context:
             tvRegion.text = item.region
             tvFermentation.text = item.fermentation
             tvBrand.text = item.brand
-            Glide.with(context).load(item.imageUri).into(imageBeer)
+            Glide.with(binding.root.context).load(item.imageUri).into(imageBeer)
         }
     }
 
