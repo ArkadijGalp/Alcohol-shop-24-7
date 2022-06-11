@@ -15,10 +15,7 @@ class StoreAdapter(
 
     //Вынести вьюхолдер в отдельный файл
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoreViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        return StoreViewHolder(
-            ItemBeerBinding.inflate(layoutInflater, parent, false)
-        )
+        return StoreViewHolder.newInstance(parent)
     }
 
     override fun onBindViewHolder(holder: StoreViewHolder, position: Int) {
@@ -28,5 +25,10 @@ class StoreAdapter(
 
     override fun getItemCount(): Int {
         return beers.size
+    }
+
+    fun bindItem(items: List<Beer>) {
+        beers = items
+        notifyDataSetChanged()
     }
 }

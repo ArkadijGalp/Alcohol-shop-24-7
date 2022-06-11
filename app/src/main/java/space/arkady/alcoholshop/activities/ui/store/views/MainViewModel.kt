@@ -8,18 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import space.arkady.alcoholshop.activities.ui.store.interactors.BeerInteractor
 import space.arkady.alcoholshop.activities.ui.store.models.Beer
 import space.arkady.alcoholshop.activities.ui.store.models.Response
-import space.arkady.alcoholshop.activities.ui.store.usecases.Usecases
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val usecases: Usecases
-) : ViewModel() {
+    private val beerInteractor: BeerInteractor
 
-    private val _beerState = mutableStateOf<Response<List<Beer>>>(Response.Loading)
-    val beerState: State<Response<List<Beer>>> = _beerState
+) : ViewModel() {
 
     val beerLiveData: LiveData<List<Beer>> get() = _beerLiveData
     private val _beerLiveData = MutableLiveData<List<Beer>>()
@@ -30,9 +28,7 @@ class MainViewModel @Inject constructor(
 
     private fun getBeers() {
         viewModelScope.launch {
-            usecases.getBeers().collect { response ->
-                _beerState.value = response
-            }
+            _beerLiveData.postValue(beerInteractor.getBeers())
         }
 
 

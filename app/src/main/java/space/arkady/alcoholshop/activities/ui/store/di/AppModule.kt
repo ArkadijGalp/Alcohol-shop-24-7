@@ -1,6 +1,5 @@
 package space.arkady.alcoholshop.activities.ui.store.di
 
-import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -8,10 +7,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import space.arkady.alcoholshop.activities.ui.store.adapter.FirebaseDatabaseManager
+import space.arkady.alcoholshop.activities.ui.store.adapter.FirebaseDatabaseManagerImpl
+import space.arkady.alcoholshop.activities.ui.store.interactors.BeerInteractor
+import space.arkady.alcoholshop.activities.ui.store.interactors.BeerInteractorImpl
 import space.arkady.alcoholshop.activities.ui.store.repository.BeerRepositoryImpl
 import space.arkady.alcoholshop.activities.ui.store.repository.BeerRepository
-import space.arkady.alcoholshop.activities.ui.store.usecases.GetBeers
-import space.arkady.alcoholshop.activities.ui.store.usecases.Usecases
 import space.arkady.alcoholshop.utils.Constants
 
 @Module
@@ -27,11 +28,15 @@ object AppModule {
 
     @Provides
     fun provideBeersRepository(
-        beersReference: CollectionReference
+        beersReference: FirebaseDatabaseManager
     ): BeerRepository = BeerRepositoryImpl(beersReference)
 
     @Provides
-    fun provideUsecases(
-        repository: BeerRepository
-    ) = Usecases(getBeers = GetBeers(repository))
+    fun provideBeerInteractor(
+        beerRepository: BeerRepository
+    ): BeerInteractor = BeerInteractorImpl(beerRepository)
+
+    @Provides
+    fun provideFirebaseDatabaseManager(
+    ): FirebaseDatabaseManager = FirebaseDatabaseManagerImpl()
 }

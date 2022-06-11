@@ -25,6 +25,17 @@ object Constants {
 
     const val USER_PROFILE_IMAGE = "User_Profile_Image"
 
+    const val BEER = "beer"
+    const val STYLE = "style"
+    const val BRAND = "brand"
+    const val FERMENTATION = "fermentation"
+    const val PRICE = "price"
+    const val PRODUCER = "producer"
+    const val REGION = "region"
+    const val IMAGE_URI = "imageUri"
+    const val VOLUME = "volume"
+    const val STRENGTH = "strength"
+
     fun showImageChooser(activity: Activity) {
         val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         activity.startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST_CODE)
